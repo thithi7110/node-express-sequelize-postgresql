@@ -19,5 +19,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
+db.jyuchuinf = require("./jyuchuinf.model.js")(sequelize, Sequelize);
+db.shohinmst = require("./shohinmst.model.js")(sequelize, Sequelize);
+db.tokuimst = require("./tokuimst.model.js")(sequelize, Sequelize);
 
 module.exports = db;
