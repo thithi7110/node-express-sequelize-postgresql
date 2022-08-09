@@ -1,9 +1,9 @@
 # node-express-sequelize-postgresql
-sample application of node-express-sequelize-postgresql
+This is a sample application of node-express-sequelize-postgresql
 
 Referenced by bezkoder repository. Thanks to the original author.
 
-Hot to excecute
+How to excecute
 
 1．Install postgreSQL
 
