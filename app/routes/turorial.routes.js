@@ -27,29 +27,6 @@ module.exports = app => {
   // Delete all Tutorials
   router.delete("/", tutorials.deleteAll);
 ////////////////////
-
-  // Create a new jyus001
-  router.post("/jyu", jyus001.create);
-
-  // Retrieve all jyus001s
-  router.get("/jyu", jyus001.findAll);
-
-  // Retrieve all published jyus001s
-  router.get("/jyu/published", jyus001.findAllPublished);
-
-  // Retrieve a single jyus001 with id
-  router.get("/jyu/:id", jyus001.findOne);
-
-  // Update a jyus001 with id
-  router.put("/jyu/:id", jyus001.update);
-
-  // Delete a jyus001 with id
-  router.delete("/jyu/:id", jyus001.delete);
-
-  // Delete all jyus001s
-  router.delete("/jyu/", jyus001.deleteAll);
-////////////////////////
-  app.use("/api/tutorials", router);
   
   var router2 = require("express").Router();
   
@@ -58,4 +35,30 @@ module.exports = app => {
   router2.get("/tokui", tokuimst.findAll);
 
   app.use("/api/mst", router2);
+
+  
+////////////////////////
+
+  var router3 = require("express").Router();
+  // Create a new jyus001
+  router3.post("/jyu", jyus001.create);
+
+  // Retrieve all jyus001s
+  router3.get("/jyu", jyus001.findAll);
+
+  // Retrieve all published jyus001s
+  router3.get("/jyu/published", jyus001.findAllPublished);
+
+  // Retrieve a single jyus001 with id
+  router3.get("/jyu/:id", jyus001.findOne);
+
+  // Update a jyus001 with id
+  router3.put("/jyu/:id", jyus001.update);
+
+  // Delete a jyus001 with id
+  router3.delete("/jyu/:id", jyus001.delete);
+
+  // Delete all jyus001s
+  router3.delete("/jyu/", jyus001.deleteAll);
+  app.use("/api", router3);
 };

@@ -4,38 +4,68 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new jyuchuinf
 exports.create = (req, res) => {
+  console.log("create");
   // Validate request
-  if (!req.body.title) {
+  if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
+  const id = req.body.id;
 
   // Create a jyuchuinf
   const jyuchuinf = {
-    title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    tokuicd: req.body.tokuicd,
+    shincd: req.body.shincd,
+    jyuchuymd: req.body.jyuchuymd,
+    suryo: req.body.suryo,
+    situryo: req.body.situryo,
+    tani: req.body.tani,
+    tanka: req.body.tanka,
+    kingaku: req.body.kingaku,
+    submitted: req.body.submitted,
   };
-
-  // Save jyuchuinf in the database
-  Jyuchuinf.create(jyuchuinf)
-    .then(data => {
-      res.send(data);
+  if (!!id) {
+    Jyuchuinf.update(jyuchuinf, {
+      where: { id: id }
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "jyuchuinf was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update jyuchuinf with id=${id}. Maybe jyuchuinf was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error updating jyuchuinf with id=" + id
+        });
       });
-    });
+  }
+  else {
+    // Save jyuchuinf in the database
+    Jyuchuinf.create(jyuchuinf)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the Tutorial."
+        });
+      });
+  }
 };
 
 // Retrieve all jyuchuinf from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+  const id = req.query.id;
+  var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
 
   Jyuchuinf.findAll({ where: condition })
     .then(data => {

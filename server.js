@@ -3,9 +3,18 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
+const whitelist = ['http://localhost:8081', 'http://localhost:8082']
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: (origin, callback) => {
+    console.log(origin);
+
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   callback(new Error())
+    // }
+    callback(null, true)
+  }
 };
 
 app.use(cors(corsOptions));
