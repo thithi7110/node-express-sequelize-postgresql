@@ -65,7 +65,7 @@ exports.create = (req, res) => {
 // Retrieve all jyuchuinf from the database.
 exports.findAll = (req, res) => {
   const id = req.query.id;
-  var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+  var condition = { id: { [Op.eq]: `${id}` } };
 
   Jyuchuinf.findAll({ where: condition })
     .then(data => {

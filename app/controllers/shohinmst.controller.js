@@ -8,7 +8,7 @@ exports.findAll = (req, res) => {
   const shohincd = req.query.shohincd;
 console.log(shohincd);
 
-  var condition = shohincd ? { shohincd: { [Op.iLike]: `%${shohincd}%`} } : null;
+  var condition = { shohincd: { [Op.eq]: `${shohincd}`} };
 
   Shohinmst.findAll({ where: condition })
     .then(data => {

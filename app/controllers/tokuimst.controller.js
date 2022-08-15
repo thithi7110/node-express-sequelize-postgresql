@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
   const tokuicd = req.query.tokuicd;
-  var condition = tokuicd ? { tokuicd: { [Op.iLike]: `%${tokuicd}%`} } : null;
+  var condition = { tokuicd: { [Op.eq]: `${tokuicd}`} };
 
   Tokuimst.findAll({ where: condition })
     .then(data => {
